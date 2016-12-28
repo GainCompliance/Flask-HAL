@@ -56,6 +56,20 @@ class BaseDocument(object):
         self._links = value
 
     @property
+    def self_link(self):
+        """Returns:
+        Link object for 'self' if found, otherwise returns None
+        """
+        if not self._links:
+            return None
+
+        for l in self._links:
+            if l and (isinstance(l, link.Self) or l.rel == 'self'):
+                return l
+
+        return None
+
+    @property
     def embedded(self):
         return self._embedded
 

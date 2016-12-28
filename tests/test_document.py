@@ -12,6 +12,7 @@ def test_document_should_have_link_self():
     with app.test_request_context('/entity/231'):
         document = Document()
         assert flask.request.path == document.links[0].href
+        assert flask.request.path == document.self_link.href  # test self_link property
 
 
 def test_document_external_self():
