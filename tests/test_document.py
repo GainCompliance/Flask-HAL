@@ -15,6 +15,14 @@ def test_document_should_have_link_self():
         assert flask.request.path == document.self_link.href  # test self_link property
 
 
+def test_embed_should_not_have_link_self():
+    app = flask.Flask(__name__)
+    with app.test_request_context('/entity/231'):
+        embed = Embedded()
+        assert len(embed.links) == 0
+        assert embed.self_link is None  # test self_link property
+
+
 def test_document_external_self():
     app = flask.Flask(__name__)
     with app.test_request_context('/entity/231'):
